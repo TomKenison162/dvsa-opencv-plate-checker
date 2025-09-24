@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE / Editor specific
+.vscode/
+.idea/
+CppProperties.json
+CMakeCache.txt
+*.sqbpro
+
+# Generated data & media
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.avi
+*.mp3
+*.jpg
+*.png
+*.webp
+
+# Ignore data folders unless a file is explicitly added
+data/

@@ -13,7 +13,7 @@ def find_power(reg):
     }
 
     try:
-        # Initialize a session object with retries
+        # Initialise a session object with retries
         session = requests.Session()
         retry_strategy = Retry(
             total=3,
@@ -48,20 +48,32 @@ def find_power(reg):
             if header and data:
                 # Store the data in the dictionary
                 info[header.text.strip()] = data.text.strip()
-
+        
         # Extract specific details
+        make = info.get('Make', 'Not found')
+        model = info.get('Model', 'Not found')
         power = info.get('Power', 'Not found')
         max_torque = info.get('Max. torque', 'Not found')
+        zero_to_60 = info.get('0 - 60 mph', 'Not found')
         engine_capacity = info.get('Engine capacity', 'Not found')
         cylinders = info.get('Cylinders', 'Not found')
         fuel_type = info.get('Fuel type', 'Not found')
 
         # Print the extracted information
+        
+        power_fix = power.split('/')
+
+        if len(power_fix)>1:
+            power=power_fix[1]
+        print("Make:", make)
+        print("Model:", model)
         print("Power:", power)
         print("Max. torque:", max_torque)
         print("Engine capacity:", engine_capacity)
-        print("Cylinders:", cylinders)
-        print("Fuel type:", fuel_type)
+        print("0-60 time:", zero_to_60)
+        #print("Cylinders:", cylinders)
+        #print("Fuel type:", fuel_type)
+        return make, model, power, max_torque, zero_to_60
 
     except requests.RequestException as e:
         print("Error occurred during request:", e)
@@ -70,4 +82,4 @@ def find_power(reg):
         print("Error occurred:", e)
 
 # Example usage
-find_power("DL18JLO")
+find_power("")
